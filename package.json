@@ -1,0 +1,35 @@
+{
+  "name": "y-websocket-wrapper-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start:dev": "export NODE_ENV=development && tsx watch src/server.ts",
+    "start:prod": "export NODE_ENV=production && npm run build && node ./build/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/websocket": "^11.0.1",
+    "@sinclair/typebox": "^0.33.14",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/ws": "^8.5.12",
+    "dotenv": "^16.4.5",
+    "env-schema": "^6.0.0",
+    "fastify": "^5.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "lodash.debounce": "^4.0.8",
+    "ws": "^8.18.0",
+    "y-leveldb": "^0.1.2",
+    "y-protocols": "^1.0.6",
+    "yjs": "^13.6.19"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  }
+}
