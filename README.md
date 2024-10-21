@@ -8,7 +8,7 @@ export function createWebsocketProvider(
 ): Provider {
   const doc = getDocFromMap(id, yjsDocMap);
 
-  const inst = new WebsocketProvider('ws://localhost:3000/ws', id, doc, {
+  const inst = new WebsocketProvider('ws://localhost:1234/ws', id, doc, {
     connect: true,
     params: {
       token: jwt,

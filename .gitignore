@@ -1,4 +1,4 @@
 /node_modules/
 /build/
-
+yjs-wss-db
 .env
