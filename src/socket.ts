@@ -4,7 +4,7 @@ import { SocketConnectionQuery, SocketConnectionUrlParams } from "./schemas/sock
 import { getUserDataFromJwtWithSignatureVerefication } from "./lib/auth";
 
 // @ts-ignore
-import { setupWSConnection } from "./../my-f-y-websocket/bin/utils.cjs";
+import { setupWSConnection } from "./../websocket/bin/utils.cjs";
 
 export function handleSocketConnection(socket:  WebSocket, request: FastifyRequest<{ Querystring: SocketConnectionQuery; Params: SocketConnectionUrlParams }>) {
   const { token } = request.query;

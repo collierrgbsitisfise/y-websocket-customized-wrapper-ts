@@ -5,7 +5,7 @@ import envVariables from "./lib/envVariables";
 
 const schema = Type.Object({
   // SERVER
-  PORT: Type.Number({ default: 3000 }),
+  PORT: Type.Number({ default: 1234 }),
   ADDRESS: Type.String({ default: "0.0.0.0" }),
   ENV: Type.String({ default: "development" }),
 
