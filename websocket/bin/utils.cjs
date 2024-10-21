@@ -139,7 +139,7 @@ class WSSharedDoc extends Y.Doc {
     this.awareness = new awarenessProtocol.Awareness(this)
     this.awareness.setLocalState(null)
 
-    // Modified to store objects instead of just identifiers
+    // Modified to store objects with additional data
     this.connectedClients = new Map()
 
     /**
@@ -260,14 +260,14 @@ const pingTimeout = 30000
  * @param {any} req
  * @param {any} opts
  */
-exports.setupWSConnection = (conn, req, { docName = req.url.slice(1).split('?')[0], gc = true, uniqueClientIdentifier = '', name = '' } = {}) => {
+exports.setupWSConnection = (conn, req, { docName = req.url.slice(1).split('?')[0], gc = true, uniqueClientIdentifier = '', additionalData = {} } = {}) => {
   conn.binaryType = 'arraybuffer'
   // get doc, initialize if it does not exist yet
   const doc = getYDoc(docName, gc)
   doc.conns.set(conn, new Set())
 
-  // Add the client to the connected clients map
-  doc.connectedClients.set(uniqueClientIdentifier, { uniqueClientIdentifier, name })
+  // Add the client to the connected clients map with additional data
+  doc.connectedClients.set(uniqueClientIdentifier, { uniqueClientIdentifier, ...additionalData })
 
   // Notify all clients about the new connection
   doc.notifyClientsAboutUsers()

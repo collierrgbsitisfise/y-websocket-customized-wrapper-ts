@@ -10,6 +10,7 @@ export type SocketConnectionUrlParams = Static<
 
 export const socketConnectionQuerySchema = Type.Object({
   token: Type.String(),
+  additionalData: Type.Optional(Type.String()),
 });
 
 export type SocketConnectionQuery = Static<

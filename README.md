@@ -12,6 +12,12 @@ export function createWebsocketProvider(
     connect: true,
     params: {
       token: jwt,
+      additionalData: JSON.stringify({
+        whatever: 'you want',
+        color: 'black',
+        anyOther: 'property',
+        name: 'test'
+      })
     }
   });
 

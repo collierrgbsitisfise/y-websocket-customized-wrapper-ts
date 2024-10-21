@@ -7,7 +7,7 @@ import { getUserDataFromJwtWithSignatureVerefication } from "./lib/auth";
 import { setupWSConnection } from "./../websocket/bin/utils.cjs";
 
 export function handleSocketConnection(socket:  WebSocket, request: FastifyRequest<{ Querystring: SocketConnectionQuery; Params: SocketConnectionUrlParams }>) {
-  const { token } = request.query;
+  const { token, additionalData = '{}' } = request.query;
   const docName = request.params.docId;
 
   const user = getUserDataFromJwtWithSignatureVerefication(token);
@@ -20,10 +20,19 @@ export function handleSocketConnection(socket:  WebSocket, request: FastifyReque
   setupWSConnection(socket, request.raw, {
     docName,
     uniqueClientIdentifier: user.userId,
-    name: user.name,
+    additionalData: getAdditionalDataWithFallBack(additionalData),
   });
 
   socket.on('close', () => {
     console.log('WebSocket connection closed:', user);
   });
+}
+
+function getAdditionalDataWithFallBack(stringifiedData: string, fallBack = {}): Record<string, unknown> {
+  try {
+    return JSON.parse(stringifiedData);
+  } catch (err) {
+    console.error(err);
+    return fallBack;
+  }
 }
