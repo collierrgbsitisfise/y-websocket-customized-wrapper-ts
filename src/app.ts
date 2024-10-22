@@ -1,5 +1,6 @@
 import fastify, { FastifyRequest, FastifyReply } from "fastify";
 import fastifyWebsocket from "@fastify/websocket";
+import fastifyCookie from "@fastify/cookie";
 import { promises as fs } from "fs";
 
 import {
@@ -14,6 +15,7 @@ async function getAppVersion() {
 }
 const app = fastify({ logger: true });
 
+app.register(fastifyCookie);
 app.register(fastifyWebsocket);
 app.register(async function (app) {
   app.get(

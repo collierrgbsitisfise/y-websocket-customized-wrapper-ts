@@ -7,7 +7,10 @@ import { getUserDataFromJwtWithSignatureVerefication } from "./lib/auth";
 import { setupWSConnection } from "./../websocket/bin/utils.cjs";
 
 export function handleSocketConnection(socket:  WebSocket, request: FastifyRequest<{ Querystring: SocketConnectionQuery; Params: SocketConnectionUrlParams }>) {
-  const { token, additionalData = '{}' } = request.query;
+  const { additionalData = '{}' } = request.query;
+  const tokenFromCookie = request.cookies?.accessToken;
+  const tokenFromQuery = request.query.token;
+  const token = tokenFromCookie || tokenFromQuery || '';
   const docName = request.params.docId;
 
   const user = getUserDataFromJwtWithSignatureVerefication(token);
