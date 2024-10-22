@@ -1,13 +1,19 @@
 import jwt from "jsonwebtoken";
 
-import { config } from './../config';
+import { config } from "./../config";
 
-export type JwtToknePayload = {
+export type JwtTokenPayload = {
   userId: string;
   name: string;
 };
-
-export function getUserDataFromJwtWithSignatureVerefication(token: string): JwtToknePayload {
-  const decoded = jwt.verify(token, config.JWT_SECRET);
-  return decoded as JwtToknePayload;
+export function getUserDataFromJwtWithSignatureVerefication(
+  token: string
+): JwtTokenPayload | null {
+  try {
+    const decoded = jwt.verify(token, Buffer.from(config.JWT_SECRET, "base64"));
+    return decoded as JwtTokenPayload;
+  } catch (error) {
+    console.error("Token verification failed:", error);
+    return null;
+  }
 }
