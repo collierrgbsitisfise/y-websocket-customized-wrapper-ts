@@ -1,4 +1,4 @@
-Client usage example
+#### Client usage example
 
 ```typescript
 export function createWebsocketProvider(
@@ -68,4 +68,19 @@ const providerFactory = useCallback(
   />
   <Editor />
 </LexicalComposer>
+```
+
+
+#### To return the version on a server request.
+
+Example of a request using curl or Postman:
+
+```
+curl http://localhost:1234/
+```
+
+The expected response should be:
+```
+WebSocket server is running!
+Version: v1.0.0
 ```
