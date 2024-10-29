@@ -2,6 +2,7 @@ import type { WebSocket } from "@fastify/websocket";
 import { FastifyRequest } from "fastify";
 import { SocketConnectionQuery, SocketConnectionUrlParams } from "./schemas/sockt.schema";
 import { getUserDataFromJwtWithSignatureVerefication } from "./lib/auth";
+import { webSocketMonitor } from "./services/webSocketMonitoring.service";
 
 // @ts-ignore
 import { setupWSConnection } from "./../websocket/bin/utils.cjs";
@@ -26,7 +27,14 @@ export function handleSocketConnection(socket:  WebSocket, request: FastifyReque
     additionalData: getAdditionalDataWithFallBack(additionalData),
   });
 
+  webSocketMonitor.addConnection(docName, socket, {
+    userId: user.userId,
+    additionalData: getAdditionalDataWithFallBack(additionalData),
+    connectionTime: new Date()
+  });
+  
   socket.on('close', () => {
+    webSocketMonitor.removeConnection(docName, socket);
     console.log('WebSocket connection closed:', user);
   });
 }

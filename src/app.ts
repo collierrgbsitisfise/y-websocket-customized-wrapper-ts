@@ -8,6 +8,7 @@ import {
   socketConnectionUrlParamsSchema,
 } from "./schemas/sockt.schema";
 import { handleSocketConnection } from "./socket";
+import { webSocketMonitoringRouter } from "./routers/webSocketMonitoring.router";
 
 async function getAppVersion() {
   const packageJson = await fs.readFile("./package.json", "utf8");
@@ -30,7 +31,7 @@ app.register(async function (app) {
     handleSocketConnection
   );
 });
-
+app.register(webSocketMonitoringRouter, { prefix: "/api/web-socket-monitoring" });
 app.get("/", async (_request: FastifyRequest, reply: FastifyReply) => {
   const appVersion = await getAppVersion();
   reply
