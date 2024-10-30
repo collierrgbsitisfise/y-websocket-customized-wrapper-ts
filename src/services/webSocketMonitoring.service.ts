@@ -1,5 +1,4 @@
 import type { WebSocket } from "@fastify/websocket";
-import { FastifyRequest, FastifyReply } from "fastify";
 
 type UserConnection = {
   userId: string;

@@ -1,7 +1,7 @@
 import fastify, { FastifyRequest, FastifyReply } from "fastify";
 import fastifyWebsocket from "@fastify/websocket";
 import fastifyCookie from "@fastify/cookie";
-import { promises as fs } from "fs";
+import { promises as fs } from "node:fs";
 
 import {
   socketConnectionQuerySchema,
