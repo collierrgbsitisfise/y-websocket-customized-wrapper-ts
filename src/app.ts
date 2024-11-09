@@ -1,7 +1,6 @@
 import fastify, { FastifyRequest, FastifyReply } from "fastify";
 import fastifyWebsocket from "@fastify/websocket";
 import fastifyCookie from "@fastify/cookie";
-import { promises as fs } from "node:fs";
 
 import {
   socketConnectionQuerySchema,
@@ -9,11 +8,8 @@ import {
 } from "./schemas/sockt.schema";
 import { handleSocketConnection } from "./socket";
 import { webSocketMonitoringRouter } from "./routers/webSocketMonitoring.router";
+import { operationalRouter } from "./routers/operational.router";
 
-async function getAppVersion() {
-  const packageJson = await fs.readFile("./package.json", "utf8");
-  return JSON.parse(packageJson).version;
-}
 const app = fastify({ logger: true });
 
 app.register(fastifyCookie);
@@ -32,11 +28,6 @@ app.register(async function (app) {
   );
 });
 app.register(webSocketMonitoringRouter, { prefix: "/api/web-socket-monitoring" });
-app.get("/", async (_request: FastifyRequest, reply: FastifyReply) => {
-  const appVersion = await getAppVersion();
-  reply
-    .type("text/plain")
-    .send(`WebSocket server is running!\nVersion: v${appVersion}`);
-});
+app.register(operationalRouter, { prefix: "/" });
 
 export { app };
