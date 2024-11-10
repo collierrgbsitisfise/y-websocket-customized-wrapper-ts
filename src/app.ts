@@ -1,20 +1,20 @@
-import fastify, { FastifyRequest, FastifyReply } from "fastify";
-import fastifyWebsocket from "@fastify/websocket";
 import fastifyCookie from "@fastify/cookie";
+import fastifyWebsocket from "@fastify/websocket";
+import fastify from "fastify";
 
+import { operationalRouter } from "./routers/operational.router";
+import { webSocketMonitoringRouter } from "./routers/webSocketMonitoring.router";
 import {
   socketConnectionQuerySchema,
   socketConnectionUrlParamsSchema,
 } from "./schemas/sockt.schema";
 import { handleSocketConnection } from "./socket";
-import { webSocketMonitoringRouter } from "./routers/webSocketMonitoring.router";
-import { operationalRouter } from "./routers/operational.router";
 
 const app = fastify({ logger: true });
 
 app.register(fastifyCookie);
 app.register(fastifyWebsocket);
-app.register(async function (app) {
+app.register(function (app) {
   app.get(
     "/ws/:docId",
     {
@@ -24,10 +24,12 @@ app.register(async function (app) {
         querystring: socketConnectionQuerySchema,
       },
     },
-    handleSocketConnection
+    handleSocketConnection,
   );
 });
-app.register(webSocketMonitoringRouter, { prefix: "/api/web-socket-monitoring" });
+app.register(webSocketMonitoringRouter, {
+  prefix: "/api/web-socket-monitoring",
+});
 app.register(operationalRouter, { prefix: "/" });
 
 export { app };

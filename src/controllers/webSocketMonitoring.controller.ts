@@ -10,11 +10,11 @@ export async function getRoomInfoByDocId(
   const { docId } = request.params;
 
   const roomInfo = webSocketMonitor.getRoomInfo(docId);
-  
+
   if (!roomInfo) {
-    throw new BadRequest('Room not found');
+    throw new BadRequest("Room not found");
   }
-  
+
   return roomInfo;
 }
 

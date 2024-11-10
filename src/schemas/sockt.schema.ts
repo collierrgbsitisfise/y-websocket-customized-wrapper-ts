@@ -13,6 +13,4 @@ export const socketConnectionQuerySchema = Type.Object({
   additionalData: Type.Optional(Type.String()),
 });
 
-export type SocketConnectionQuery = Static<
-  typeof socketConnectionQuerySchema
->;
+export type SocketConnectionQuery = Static<typeof socketConnectionQuerySchema>;

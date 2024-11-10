@@ -15,11 +15,13 @@ A customized WebSocket server implementation for Yjs, built on top of the standa
 This implementation extends the standard Yjs WebSocket server with:
 
 1. **User Authentication**
+
    - JWT token validation
    - Flexible token delivery (cookies or query parameters)
    - Automatic unauthorized connection handling
 
 2. **Enhanced Client Tracking**
+
    - Unique client identification
    - Custom metadata support per connection
    - Real-time user list updates
@@ -32,6 +34,7 @@ This implementation extends the standard Yjs WebSocket server with:
 ### Authentication
 
 The server accepts authentication tokens in two ways:
+
 1. Via `accessToken` cookie
 2. Via `token` query parameter
 
@@ -40,11 +43,13 @@ If authentication fails, the connection is automatically closed with code 1008 (
 ### Modified Features from Standard y-websocket
 
 1. **Extended Client Management**
+
    - Added `connectedClients` Map to store client metadata
    - Enhanced client disconnection handling
    - Real-time user list updates
 
 2. **Custom Message Types**
+
    - Added `messageUserList` (type 100) for user presence updates
    - Enhanced message handling for user list synchronization
 
@@ -52,7 +57,6 @@ If authentication fails, the connection is automatically closed with code 1008 (
    - Integration with `webSocketMonitor` service
    - Connection timing tracking
    - Document-based connection management
-
 
 #### Client usage example
 
@@ -126,7 +130,6 @@ const providerFactory = useCallback(
 </LexicalComposer>
 ```
 
-
 #### To return the version on a server request.
 
 Example of a request using curl or Postman:
@@ -136,6 +139,7 @@ curl http://localhost:1234/
 ```
 
 The expected response should be:
+
 ```
 WebSocket server is running!
 Version: v1.0.0

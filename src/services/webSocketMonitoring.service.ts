@@ -4,13 +4,13 @@ type UserConnection = {
   userId: string;
   additionalData: Record<string, unknown>;
   connectionTime: Date;
-}
+};
 
 type RoomInfo = {
   docId: string;
   connections: Map<WebSocket, UserConnection>;
   createdAt: Date;
-}
+};
 
 class WebSocketMonitoring {
   private static instance: WebSocketMonitoring;
@@ -34,7 +34,7 @@ class WebSocketMonitoring {
       roomInfo = {
         docId,
         connections: new Map(),
-        createdAt: new Date()
+        createdAt: new Date(),
       };
       this.rooms.set(docId, roomInfo);
     }
@@ -57,7 +57,7 @@ class WebSocketMonitoring {
     return Array.from(this.rooms.entries()).map(([docId, info]) => ({
       docId,
       connectionCount: info.connections.size,
-      createdAt: info.createdAt
+      createdAt: info.createdAt,
     }));
   }
 
@@ -68,11 +68,11 @@ class WebSocketMonitoring {
     return {
       docId,
       createdAt: roomInfo.createdAt,
-      connections: Array.from(roomInfo.connections.values()).map(conn => ({
+      connections: Array.from(roomInfo.connections.values()).map((conn) => ({
         userId: conn.userId,
         additionalData: conn.additionalData,
-        connectionTime: conn.connectionTime
-      }))
+        connectionTime: conn.connectionTime,
+      })),
     };
   }
 }
