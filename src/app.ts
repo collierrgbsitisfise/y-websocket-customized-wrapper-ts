@@ -3,29 +3,15 @@ import fastifyWebsocket from "@fastify/websocket";
 import fastify from "fastify";
 
 import { operationalRouter } from "./routers/operational.router";
+import { socketRouter } from "./routers/socket.router";
 import { webSocketMonitoringRouter } from "./routers/webSocketMonitoring.router";
-import {
-  socketConnectionQuerySchema,
-  socketConnectionUrlParamsSchema,
-} from "./schemas/sockt.schema";
-import { handleSocketConnection } from "./socket";
 
 const app = fastify({ logger: true });
 
 app.register(fastifyCookie);
 app.register(fastifyWebsocket);
-app.register(function (app) {
-  app.get(
-    "/ws/:docId",
-    {
-      websocket: true,
-      schema: {
-        params: socketConnectionUrlParamsSchema,
-        querystring: socketConnectionQuerySchema,
-      },
-    },
-    handleSocketConnection,
-  );
+app.register(socketRouter, {
+  prefix: "/ws",
 });
 app.register(webSocketMonitoringRouter, {
   prefix: "/api/web-socket-monitoring",

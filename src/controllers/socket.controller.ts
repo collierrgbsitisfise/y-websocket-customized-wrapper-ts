@@ -1,14 +1,14 @@
 import type { WebSocket } from "@fastify/websocket";
 import { FastifyRequest } from "fastify";
 
-// @ts-expect-error - no types available
-import { setupWSConnection } from "./../websocket/bin/utils.cjs";
-import { getUserDataFromJwtWithSignatureVerefication } from "./lib/auth";
+import { getUserDataFromJwtWithSignatureVerefication } from "./../lib/auth";
 import {
   SocketConnectionQuery,
   SocketConnectionUrlParams,
-} from "./schemas/sockt.schema";
-import { webSocketMonitor } from "./services/webSocketMonitoring.service";
+} from "./../schemas/sockt.schema";
+import { webSocketMonitor } from "./../services/webSocketMonitoring.service";
+// @ts-expect-error - no types available
+import { setupWSConnection } from "./../websocket/bin/utils.cjs";
 
 export function handleSocketConnection(
   socket: WebSocket,
@@ -30,15 +30,18 @@ export function handleSocketConnection(
     return;
   }
 
+  const additionalDataByFallback =
+    getAdditionalDataWithFallBack(additionalData);
+
   setupWSConnection(socket, request.raw, {
     docName,
     uniqueClientIdentifier: user.userId,
-    additionalData: getAdditionalDataWithFallBack(additionalData),
+    additionalData: additionalDataByFallback,
   });
 
   webSocketMonitor.addConnection(docName, socket, {
     userId: user.userId,
-    additionalData: getAdditionalDataWithFallBack(additionalData),
+    additionalData: additionalDataByFallback,
     connectionTime: new Date(),
   });
 
