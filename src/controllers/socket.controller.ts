@@ -6,7 +6,7 @@ import {
   SocketConnectionQuery,
   SocketConnectionUrlParams,
 } from "./../schemas/sockt.schema";
-import { webSocketMonitor } from "./../services/webSocketMonitoring.service";
+import { socketMonitor } from "./../services/socketMonitoring.service";
 // @ts-expect-error - no types available
 import { setupWSConnection } from "./../websocket/bin/utils.cjs";
 
@@ -39,14 +39,14 @@ export function handleSocketConnection(
     additionalData: additionalDataByFallback,
   });
 
-  webSocketMonitor.addConnection(docName, socket, {
+  socketMonitor.addConnection(docName, socket, {
     userId: user.userId,
     additionalData: additionalDataByFallback,
     connectionTime: new Date(),
   });
 
   socket.on("close", () => {
-    webSocketMonitor.removeConnection(docName, socket);
+    socketMonitor.removeConnection(docName, socket);
     console.log("WebSocket connection closed:", user);
   });
 }

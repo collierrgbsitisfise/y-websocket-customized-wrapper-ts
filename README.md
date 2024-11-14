@@ -54,7 +54,7 @@ If authentication fails, the connection is automatically closed with code 1008 (
    - Enhanced message handling for user list synchronization
 
 3. **Connection Monitoring**
-   - Integration with `webSocketMonitor` service
+   - Integration with `socketMonitor` service
    - Connection timing tracking
    - Document-based connection management
 

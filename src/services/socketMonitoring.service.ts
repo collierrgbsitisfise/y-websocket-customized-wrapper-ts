@@ -12,19 +12,19 @@ type RoomInfo = {
   createdAt: Date;
 };
 
-class WebSocketMonitoring {
-  private static instance: WebSocketMonitoring;
+class SocketMonitoring {
+  private static instance: SocketMonitoring;
   private rooms: Map<string, RoomInfo>;
 
   private constructor() {
     this.rooms = new Map();
   }
 
-  static getInstance(): WebSocketMonitoring {
-    if (!WebSocketMonitoring.instance) {
-      WebSocketMonitoring.instance = new WebSocketMonitoring();
+  static getInstance(): SocketMonitoring {
+    if (!SocketMonitoring.instance) {
+      SocketMonitoring.instance = new SocketMonitoring();
     }
-    return WebSocketMonitoring.instance;
+    return SocketMonitoring.instance;
   }
 
   addConnection(docId: string, socket: WebSocket, userData: UserConnection) {
@@ -77,4 +77,4 @@ class WebSocketMonitoring {
   }
 }
 
-export const webSocketMonitor = WebSocketMonitoring.getInstance();
+export const socketMonitor = SocketMonitoring.getInstance();

@@ -4,7 +4,7 @@ import fastify from "fastify";
 
 import { operationalRouter } from "./routers/operational.router";
 import { socketRouter } from "./routers/socket.router";
-import { webSocketMonitoringRouter } from "./routers/webSocketMonitoring.router";
+import { socketMonitoringRouter } from "./routers/socketMonitoring.router";
 
 const app = fastify({ logger: true });
 
@@ -13,9 +13,16 @@ app.register(fastifyWebsocket);
 app.register(socketRouter, {
   prefix: "/ws",
 });
-app.register(webSocketMonitoringRouter, {
+
+// @deprecated
+// in favour to `/api/socket-monitoring`, if not used feel free to remove
+app.register(socketMonitoringRouter, {
   prefix: "/api/web-socket-monitoring",
 });
+app.register(socketMonitoringRouter, {
+  prefix: "/api/socket-monitoring",
+});
+
 app.register(operationalRouter, { prefix: "/" });
 
 export { app };

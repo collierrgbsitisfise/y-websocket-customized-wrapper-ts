@@ -3,10 +3,10 @@ import { FastifyInstance } from "fastify";
 import {
   getAllRooms,
   getRoomInfoByDocId,
-} from "../controllers/webSocketMonitoring.controller";
+} from "../controllers/socketMonitoring.controller";
 import { getActiveRoomInfoByDocIdUrlParamsSchema } from "../schemas/webSocketMonitoring.schema";
 
-async function webSocketMonitoringRouter(app: FastifyInstance) {
+async function socketMonitoringRouter(app: FastifyInstance) {
   app.route({
     method: "GET",
     url: "/list",
@@ -24,4 +24,4 @@ async function webSocketMonitoringRouter(app: FastifyInstance) {
   });
 }
 
-export { webSocketMonitoringRouter };
+export { socketMonitoringRouter };

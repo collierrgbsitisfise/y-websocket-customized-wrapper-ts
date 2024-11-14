@@ -2,14 +2,14 @@ import { FastifyRequest } from "fastify";
 import { BadRequest } from "http-errors";
 
 import { GetActiveRoomInfoByDocIdUrlParams } from "../schemas/webSocketMonitoring.schema";
-import { webSocketMonitor } from "../services/webSocketMonitoring.service";
+import { socketMonitor } from "../services/socketMonitoring.service";
 
 export async function getRoomInfoByDocId(
   request: FastifyRequest<{ Params: GetActiveRoomInfoByDocIdUrlParams }>,
 ) {
   const { docId } = request.params;
 
-  const roomInfo = webSocketMonitor.getRoomInfo(docId);
+  const roomInfo = socketMonitor.getRoomInfo(docId);
 
   if (!roomInfo) {
     throw new BadRequest("Room not found");
@@ -19,5 +19,5 @@ export async function getRoomInfoByDocId(
 }
 
 export async function getAllRooms() {
-  return webSocketMonitor.getRooms();
+  return socketMonitor.getRooms();
 }
