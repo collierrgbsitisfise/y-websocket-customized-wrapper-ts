@@ -6,7 +6,7 @@ import {
 } from "../controllers/socketMonitoring.controller";
 import { getActiveRoomInfoByDocIdUrlParamsSchema } from "../schemas/webSocketMonitoring.schema";
 
-async function socketMonitoringRouter(app: FastifyInstance) {
+function socketMonitoringRouter(app: FastifyInstance) {
   app.route({
     method: "GET",
     url: "/list",

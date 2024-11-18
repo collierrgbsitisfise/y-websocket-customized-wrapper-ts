@@ -6,7 +6,7 @@ import {
   socketConnectionUrlParamsSchema,
 } from "./../schemas/sockt.schema";
 
-async function socketRouter(app: FastifyInstance) {
+function socketRouter(app: FastifyInstance) {
   // @NOTE preferable way to declare endpoint. This is exception to the rule
   // app.route({
   //   method: ...,

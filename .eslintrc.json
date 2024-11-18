@@ -12,8 +12,18 @@
   "plugins": ["@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2022
+    "ecmaVersion": 2022,
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
   },
   "ignorePatterns": ["node_modules/", "build/"],
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/require-await": "error",
+    "@typescript-eslint/promise-function-async": ["error", {
+      "checkArrowFunctions": true,
+      "checkFunctionDeclarations": true,
+      "checkFunctionExpressions": true,
+      "checkMethodDeclarations": true
+    }]
+  }
 }
