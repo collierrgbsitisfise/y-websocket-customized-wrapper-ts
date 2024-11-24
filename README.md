@@ -108,7 +108,7 @@ const providerFactory = useCallback(
     const provider = createWebsocketProvider(id, yjsDocMap, jwt);
     // @ts-ignore
     provider.on('customUserList', ({ userList }) => {
-      console.log('Connected users LIST IN COMPONEND:', userList);
+      console.log('Connected users LIST IN COMPONENT:', userList);
     });
     setTimeout(() => setYjsProvider(provider), 0);
 

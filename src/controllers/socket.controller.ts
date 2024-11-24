@@ -1,11 +1,11 @@
 import type { WebSocket } from "@fastify/websocket";
 import { FastifyRequest } from "fastify";
 
-import { getUserDataFromJwtWithSignatureVerefication } from "./../lib/auth";
+import { getUserDataFromJwtWithSignatureVerification } from "./../lib/auth";
 import {
   SocketConnectionQuery,
   SocketConnectionUrlParams,
-} from "./../schemas/sockt.schema";
+} from "./../schemas/socket.schema";
 import { socketMonitor } from "./../services/socketMonitoring.service";
 // @ts-expect-error - no types available
 import { setupWSConnection } from "./../websocket/bin/utils.cjs";
@@ -23,7 +23,7 @@ export function handleSocketConnection(
   const token = tokenFromCookie || tokenFromQuery || "";
   const docName = request.params.docId;
 
-  const user = getUserDataFromJwtWithSignatureVerefication(token);
+  const user = getUserDataFromJwtWithSignatureVerification(token);
 
   if (!user) {
     socket.close(1008, "Unauthorized");

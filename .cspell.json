@@ -1,0 +1,24 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+      "healthcheck",
+      "typebox",
+      "ianvs",
+      "leveldb",
+      "YPERSISTENCE"
+  ],
+  "ignorePaths": [
+      "node_modules/**",
+      "build/**",
+      "dist/**",
+      "tsconfig.json",
+      "tmp/**",
+      "websocket/**",
+      "yjs-wss-db/**"
+  ],
+  "dictionaries": [
+      "typescript",
+      "node"
+  ]
+}
