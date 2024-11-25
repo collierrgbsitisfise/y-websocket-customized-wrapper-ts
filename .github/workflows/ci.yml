@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  checks:
+  static-checks:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,3 +33,6 @@ jobs:
 
     - name: Spell check
       run: npm run spell
+
+    - name: Build
+      run: npm build
