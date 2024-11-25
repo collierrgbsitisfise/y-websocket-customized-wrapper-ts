@@ -7,12 +7,12 @@
     "build": "tsc",
     "start:dev": "export NODE_ENV=development && tsx watch src/server.ts",
     "start:prod": "export NODE_ENV=production && npm run build && node ./build/server.js",
-    "lint": "eslint src --ext .js,.ts",
+    "lint:check": "eslint src --ext .js,.ts",
     "lint:fix": "eslint --fix src --ext .js,.ts",
-    "format": "prettier \"src/**/*.+(js|ts)\" --color --list-different",
+    "format:check": "prettier \"src/**/*.+(js|ts)\" --color --list-different",
     "format:fix": "prettier --write \"src/**/*.+(js|ts)\" README.md",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "spell": " npx cspell \"**/*\""
+    "spell": " npx cspell \"**/*\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
