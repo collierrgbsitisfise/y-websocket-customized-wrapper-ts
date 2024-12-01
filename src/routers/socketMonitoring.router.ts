@@ -4,7 +4,7 @@ import {
   getAllRooms,
   getRoomInfoByDocId,
 } from "../controllers/socketMonitoring.controller";
-import { getActiveRoomInfoByDocIdUrlParamsSchema } from "../schemas/webSocketMonitoring.schema";
+import { getActiveRoomInfoByDocIdUrlParamsSchema } from "../schemas/socketMonitoring.schema";
 
 function socketMonitoringRouter(app: FastifyInstance) {
   app.route({

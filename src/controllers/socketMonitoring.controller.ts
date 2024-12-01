@@ -1,7 +1,7 @@
 import { FastifyRequest } from "fastify";
 import { BadRequest } from "http-errors";
 
-import { GetActiveRoomInfoByDocIdUrlParams } from "../schemas/webSocketMonitoring.schema";
+import { GetActiveRoomInfoByDocIdUrlParams } from "../schemas/socketMonitoring.schema";
 import { socketMonitor } from "../services/socketMonitoring.service";
 
 export function getRoomInfoByDocId(
